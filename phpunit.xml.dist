@@ -6,11 +6,8 @@
         <testsuite name="Unit">
             <directory>tests</directory>
         </testsuite>
+        <testsuite name="Usage">
+            <directory suffix=".phpt">docs/usage</directory>
+        </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory>src</directory>
-        </whitelist>
-    </filter>
 </phpunit>

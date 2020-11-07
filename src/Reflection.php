@@ -23,6 +23,7 @@ class Reflection
     /**
      * @param string $name
      * @return string[]
+     * @return array<string>
      * @internal
      */
     public function getDependencies(string $name): array
@@ -71,6 +72,10 @@ class Reflection
         }
     }
 
+    /**
+     * @param ReflectionMethod|null $method
+     * @return array<string>
+     */
     private static function getMethodDependencies(?ReflectionMethod $method): array
     {
         $parameters = [];
@@ -85,7 +90,12 @@ class Reflection
         return array_values($parameters);
     }
 
-    private function tranform(string $name, array $params)
+    /**
+     * @param string $name
+     * @param array<string, string> $params
+     * @return array<string, string>
+     */
+    private function tranform(string $name, array $params): array
     {
         foreach ($this->transformers as $tranfromer) {
             $params = $tranfromer->transform($name, $params);
@@ -93,7 +103,11 @@ class Reflection
         return $params;
     }
 
-    private static function getAnnotationParameters(string $comment)
+    /**
+     * @param string $comment
+     * @return array<string>
+     */
+    private static function getAnnotationParameters(string $comment): array
     {
         $result = [];
         $matches = [];

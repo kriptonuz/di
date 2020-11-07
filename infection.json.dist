@@ -5,11 +5,10 @@
     ]
   },
   "timeout": 10,
-  "tmpDir": "./",
   "logs": {
     "badge": {
       "branch": "master"
     }
   },
-  "testFrameworkOptions": "-vvv"
+  "testFrameworkOptions": "--testsuite Unit"
 }

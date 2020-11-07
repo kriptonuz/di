@@ -105,20 +105,24 @@ class ReflectionTest extends TestCase
 
     public function testInjection()
     {
-        $obj = new class (1) {
+        $obj = new class (1, 2) {
             private $a;
+            private $b;
 
             /**
              * @param int $a
-             * @inject b\magic $a
+             * @param int $b
+             * @inject a\magic $a
+             * @inject b\magic $b
              */
-            public function __construct(int $a)
+            public function __construct(int $a, int $b)
             {
                 $this->a = $a;
+                $this->b = $b;
             }
         };
         $class = get_class($obj);
-        $this->assertSame(['b\magic'], $this->service->getDependencies($class));
+        $this->assertSame(['a\magic', 'b\magic'], $this->service->getDependencies($class));
     }
 
     public function testIsVariadicWithoutParams()
